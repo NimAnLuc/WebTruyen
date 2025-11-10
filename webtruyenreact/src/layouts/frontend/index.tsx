@@ -174,17 +174,15 @@ const HomePage: React.FC = () => {
               </a>
             </div>
           </div>
-          <div className="flex-grow-1 mx-3 d-flex justify-content-center">
-            <SearchBar  />
+          <div className="flex-grow-1 mx-3 d-none d-lg-flex justify-content-center">
+            <SearchBar />
           </div>
 
           <div
-            className="d-flex align-items-center justify-content-between p-3 rounded"
-            style={{
-              gap: "12px",
-            }}
+            className="d-flex align-items-center p-3 rounded"
+            style={{ gap: "12px" }}
           >
-            {/* Nút Dark Mode */}
+            {/* Nút Dark Mode — luôn hiển thị */}
             <button
               className="btn btn-sm rounded-circle"
               onClick={toggleDarkMode}
@@ -193,84 +191,85 @@ const HomePage: React.FC = () => {
                 color: "white",
                 width: "36px",
                 height: "36px",
-                flexShrink: 0, // tránh bóp nhỏ nút
+                flexShrink: 0,
               }}
             >
               <i className={`fas ${isDarkMode ? "fa-moon" : "fa-sun"}`}></i>
             </button>
 
-            {/* Khối đăng ký + đăng nhập */}
-            {user ? (
-              <div className="dropdown">
-                <button
-                  className="btn btn-light d-flex align-items-center gap-2 dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ borderRadius: "30px", padding: "6px 12px" }}
-                >
-                  <img
-                    src={
-                      user.image_url
-                        ? `${user.image_url}`
-                        : "/images/logo.png"
-                    }
-                    alt="avatar"
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <span className="fw-semibold text-dark">
-                    {user.name || "Người dùng"}
-                  </span>
-                </button>
+            {/* Khối đăng ký + đăng nhập — chỉ hiện trên desktop */}
+            <div className="d-none d-lg-flex align-items-center justify-content-between flex-grow-1 ms-2">
+              {user ? (
+                <div className="dropdown">
+                  <button
+                    className="btn btn-light d-flex align-items-center gap-2 dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{ borderRadius: "30px", padding: "6px 12px" }}
+                  >
+                    <img
+                      src={
+                        user.image_url
+                          ? `${user.image_url}`
+                          : "/images/logo.png"
+                      }
+                      alt="avatar"
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <span className="fw-semibold text-dark d-none d-md-inline">
+                      {user.name || "Người dùng"}
+                    </span>
+                  </button>
 
-                <ul className="dropdown-menu dropdown-menu-end shadow">
-                  <li>
-                    <Link className="dropdown-item" to="/profile">
-                      <i className="fas fa-user me-2"></i> Thông tin tài khoản
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/profile?tab=follow">
-                      <i className="fas fa-book me-2"></i> Truyện theo dõi
-                    </Link>
-                  </li>
-
-                  <li>
-                    <button
-                      className="dropdown-item text-danger"
-                      onClick={handleLogout}
+                  <ul className="dropdown-menu dropdown-menu-end shadow">
+                    <li>
+                      <Link className="dropdown-item" to="/profile">
+                        <i className="fas fa-user me-2"></i> Thông tin tài khoản
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/profile?tab=follow">
+                        <i className="fas fa-book me-2"></i> Truyện theo dõi
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        className="dropdown-item text-danger"
+                        onClick={handleLogout}
+                      >
+                        <i className="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <>
+                  <div className="mx-2">
+                    <div className="text-white fw-semibold mb-1">
+                      Chưa có tài khoản?
+                    </div>
+                    <Link
+                      to="/register"
+                      className="text-white fw-bold text-decoration-none"
                     >
-                      <i className="fas fa-sign-out-alt me-2"></i> Đăng xuất
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <div className="d-flex align-items-center justify-content-between flex-grow-1 ms-2">
-                <div className="mx-2">
-                  <div className="text-white fw-semibold mb-1">
-                    Chưa có tài khoản?
+                      Đăng ký ngay <i className="fas fa-chevron-right"></i>
+                    </Link>
                   </div>
                   <Link
-                    to="/register"
-                    className="text-white fw-bold text-decoration-none"
+                    to="/login"
+                    className="btn btn-warning fw-bold d-flex align-items-center gap-2 px-3 py-2"
                   >
-                    Đăng ký ngay <i className="fas fa-chevron-right"></i>
+                    <i className="fas fa-sign-in-alt"></i> Đăng nhập
                   </Link>
-                </div>
-                <Link
-                  to="/login"
-                  className="btn btn-warning fw-bold d-flex align-items-center gap-2 px-3 py-2"
-                >
-                  <i className="fas fa-sign-in-alt"></i> Đăng nhập
-                </Link>
-              </div>
-            )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </header>
@@ -367,6 +366,10 @@ const HomePage: React.FC = () => {
           ></button>
         </div>
         <div className="offcanvas-body p-0">
+          <div className="p-3 border-bottom bg-light sticky-top">
+            <SearchBar />
+          </div>
+
           <nav className="nav flex-column offcanvas-menu">
             {navItems.map((item) =>
               item.name === "THỂ LOẠI" ? (
@@ -419,13 +422,69 @@ const HomePage: React.FC = () => {
                 </NavLink>
               )
             )}
-            <div className="p-3">
-              <button className="btn btn-primary w-100 rounded-pill">
-                Đăng nhập
-              </button>
-              <button className="btn btn-outline-primary w-100 rounded-pill mt-2">
-                Đăng ký
-              </button>
+            <div className="p-3 border-top">
+              {user ? (
+                <div className="text-center">
+                  <img
+                    src={
+                      user.image_url ? `${user.image_url}` : "/images/logo.png"
+                    }
+                    alt="avatar"
+                    className="rounded-circle mb-2"
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <div className="fw-bold mb-3">
+                    {user.name || "Người dùng"}
+                  </div>
+
+                  <Link
+                    to="/profile"
+                    className="btn btn-outline-warning w-100 mb-2"
+                    onClick={toggleOffcanvas}
+                  >
+                    <i className="fas fa-user me-2"></i> Thông tin tài khoản
+                  </Link>
+
+                  <Link
+                    to="/profile?tab=follow"
+                    className="btn btn-outline-warning w-100 mb-2"
+                    onClick={toggleOffcanvas}
+                  >
+                    <i className="fas fa-book me-2"></i> Truyện theo dõi
+                  </Link>
+
+                  <button
+                    className="btn btn-danger w-100"
+                    onClick={() => {
+                      handleLogout();
+                      toggleOffcanvas();
+                    }}
+                  >
+                    <i className="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                  </button>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <Link
+                    to="/login"
+                    className="btn btn-warning w-100 mb-2 fw-bold"
+                    onClick={toggleOffcanvas}
+                  >
+                    <i className="fas fa-sign-in-alt me-2"></i> Đăng nhập
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="btn btn-outline-warning w-100 fw-bold"
+                    onClick={toggleOffcanvas}
+                  >
+                    <i className="fas fa-user-plus me-2"></i> Đăng ký
+                  </Link>
+                </div>
+              )}
             </div>
           </nav>
         </div>

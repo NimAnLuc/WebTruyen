@@ -1176,3 +1176,59 @@ body.dark-mode .loading-message {
   color: #f0f0f0;
 }
 
+.auto-scroll-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auto-scroll-btn {
+  border-radius: 50%;
+  font-size: 28px; /* desktop */
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  line-height: 1;
+  border-width: 2px;
+}
+
+/* bỏ hiệu ứng shift khi bấm */
+.auto-scroll-btn:focus, 
+.auto-scroll-btn:active {
+  box-shadow: none;
+}
+
+/* Mobile: nhỏ lại */
+@media (max-width: 768px) {
+  .auto-scroll-btn {
+    font-size: 20px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+
+body.dark-mode .modal.fade {
+  transition: opacity 0.15s linear !important;
+  opacity: 0 !important;
+}
+
+body.dark-mode .modal.fade.show {
+  opacity: 1 !important;
+}
+
+body.dark-mode .modal-backdrop.fade {
+  transition: opacity 0.15s linear !important;
+  opacity: 0 !important;
+}
+
+body.dark-mode .modal-backdrop.fade.show {
+  opacity: 0.5 !important;
+}

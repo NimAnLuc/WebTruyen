@@ -7,6 +7,7 @@ import { apiService } from "../../../services/apiService.ts";
 import { Modal, Button, Form } from "react-bootstrap";
 import CommentSection from "../../../components/CommentSection.tsx";
 import LazyImage from "../../../components/Loading/LazyImage.tsx";
+import AutoScrollControl from "../../../components/auto/AutoScrollControl.tsx";
 
 interface Comic {
   id: number;
@@ -53,6 +54,8 @@ const ComicReader: React.FC = () => {
   const [reportTitle, setReportTitle] = useState("");
   const [showReportModal, setShowReportModal] = useState(false);
   const [loadedImagesCount, setLoadedImagesCount] = useState(0);
+  const [autoScroll, setAutoScroll] = useState(false);
+  const [scrollSpeed, setScrollSpeed] = useState(1);
 
   useEffect(() => {
     const fetchChapterData = async () => {
@@ -121,9 +124,7 @@ const ComicReader: React.FC = () => {
     if (chapter_id) fetchChapterData();
   }, [chapter_id, comic_slug]);
   useEffect(() => {
-
     if (pages.length > 0 && loadedImagesCount === pages.length) {
-
       apiService.increaseChapterView(Number(chapter_id)).catch(() => {
         console.warn("⚠️ Increase view failed");
       });
@@ -143,8 +144,10 @@ const ComicReader: React.FC = () => {
     if (currentIndex > 0) {
       const next = chapterList[currentIndex - 1];
       navigate(`/comic/${comic_slug}/${next.slug}/${next.id}`);
+      return false;
     } else {
       toast.info("Đây là chương mới nhất!");
+      return true;
     }
   };
 
@@ -226,6 +229,14 @@ const ComicReader: React.FC = () => {
             </div>
           </div>
         </div>
+        {/* 🔹 Nút Auto-Scroll */}
+        <AutoScrollControl
+          autoScroll={autoScroll}
+          setAutoScroll={setAutoScroll}
+          scrollSpeed={scrollSpeed}
+          setScrollSpeed={setScrollSpeed}
+          handleNextChapter={handleNextChapter}
+        />
 
         {/* Nội dung truyện */}
         {isLoading ? (

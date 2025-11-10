@@ -122,6 +122,9 @@ const RequestCreateTeamModal: React.FC<RequestCreateTeamModalProps> = ({
                 onChange={handleChange}
                 placeholder="Nhập tên nhóm..."
               />
+              <small className="text-muted">
+                ⚙️ Gợi ý: Chọn tên ngắn gọn, dễ nhớ, tránh trùng với nhóm khác.
+              </small>
             </div>
 
             {/* Mô tả */}
@@ -135,6 +138,11 @@ const RequestCreateTeamModal: React.FC<RequestCreateTeamModalProps> = ({
                 onChange={handleChange}
                 placeholder="Giới thiệu ngắn gọn về nhóm..."
               />
+              <small className="text-muted">
+                ✏️ Gợi ý: Viết đôi nét về nhóm, định hướng, thể loại chính và
+                nếu có thì nêu thêm chính sách hoạt động, quy tắc hoặc quy trình
+                tuyển thành viên.
+              </small>
             </div>
 
             {/* Lý do */}
@@ -148,6 +156,18 @@ const RequestCreateTeamModal: React.FC<RequestCreateTeamModalProps> = ({
                 onChange={handleChange}
                 placeholder="Giải thích lý do muốn tạo nhóm..."
               />
+              <small className="text-muted d-block">
+                💬 <b>Lý do:</b> Giải thích vì sao bạn muốn lập nhóm (ví dụ:
+                dịch lâu dài, lập cộng đồng riêng, học hỏi thêm, v.v.)
+              </small>
+              <small className="text-muted d-block">
+                🎯 <b>Mục tiêu:</b> Nêu định hướng hoạt động của nhóm nếu có (ví
+                dụ: tập trung dịch truyện hành động, tuyển thêm thành viên,...)
+              </small>
+              <small className="text-muted d-block">
+                📬 <b>Liên hệ:</b> Ghi rõ cách để admin có thể xác nhận với bạn
+                (ví dụ: link Facebook, Discord, email hoặc số điện thoại).
+              </small>
             </div>
 
             {/* Upload ảnh */}
@@ -187,6 +207,9 @@ const RequestCreateTeamModal: React.FC<RequestCreateTeamModalProps> = ({
                   />
                 </div>
               )}
+              <small className="text-muted">
+                🧩 Logo giúp nhóm bạn dễ nhận diện hơn trên hệ thống.
+              </small>
             </div>
           </div>
 

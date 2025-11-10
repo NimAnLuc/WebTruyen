@@ -62,7 +62,7 @@ const Register = () => {
 
       // ✅ Upload ảnh lên Cloudinary nếu có chọn
       if (image) {
-        toast.info("📤 Đang tải ảnh lên Cloudinary...");
+
 
         const formDataCloud = new FormData();
         formDataCloud.append("file", image);
